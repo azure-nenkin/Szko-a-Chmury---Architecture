@@ -10,10 +10,10 @@ Konwencja w oparciu o https://docs.microsoft.com/en-us/azure/architecture/best-p
 &lt;environment&gt;         : dev, prod, QA 
 &lt;role&gt;                : sql, web, messaging
 &lt;disktype&gt;            : OS, Data, DB
-  
+<BR>  
 Resource Group                : &lt;service_short_name&gt-&lt;environment&gt-rg     example: app1-test-rg 
-VNET                          : &lt;service short name&gt-vnet                 example: app1-vnet
-Virtual Machines              : &lt;service short name&gt-&lt;role&gt-vm<number&gt    example: app1-sql-vm1 
+VNET                          : &lt;service short name&gt-vnet                      example: app1-vnet
+Virtual Machines              : &lt;service short name&gt-&lt;role&gt-vm<number&gt  example: app1-sql-vm1 
 Managed Disk name             : &lt;disktype&gtdisk&lt;number&gt                    example: OSdisk1 
 Storage account name (data)   : &lt;globally unique name&gt&lt;number&gt            example: app1data001
 Storage account name (disks)  : &lt;vm name without hyphens&gtst&lt;number&gt       example: app1sqlvm1st0
