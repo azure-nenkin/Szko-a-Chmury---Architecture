@@ -4,11 +4,11 @@
 
 Konwencja w oparciu o https://docs.microsoft.com/en-us/azure/architecture/best-practices/naming-conventions z małymi poprawkmi dla VMs
 
-<globally unique name>: app1data, service1, convers2
-<service_short_name   : app1, ser1, con2  
-<environment>         : dev, prod, QA
-<role>                : sql, web, messaging
-<disktype>            : OS, Data, DB
+&lt;globally unique name &gt;: app1data, service1, convers2
+&lt;service_short_name&gt;  : app1, ser1, con2  
+&lt;environment&gt;         : dev, prod, QA
+&lt;role&gt;                : sql, web, messaging
+&lt;disktype&gt;            : OS, Data, DB
 
 Resource Group                : <service_short_name>-<environment>-rg     example: app1-test-rg 
 VNET                          : <service short name>-vnet                 example: app1-vnet
