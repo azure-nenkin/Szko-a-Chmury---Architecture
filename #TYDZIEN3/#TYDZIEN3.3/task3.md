@@ -1,0 +1,3 @@
+## #TYDZIEN3.3 
+
+>Zbuduj najprostrzą właśną rolę RBAC, która pozwala użytkownikowi uruchomić maszynę, zatrzymać ją i zgłosić zgłoszenie do supportu przez Portal Azure
