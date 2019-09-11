@@ -10,8 +10,9 @@ Konwencja w oparciu o https://docs.microsoft.com/en-us/azure/architecture/best-p
 &lt;environment&gt;         : dev, prod, QA 
 &lt;role&gt;                : sql, web, messaging
 &lt;disktype&gt;            : OS, Data, DB
+</P>
 
-
+<P><PRE>
 Resource Group                : &lt;service_short_name&gt-&lt;environment&gt-rg     example: app1-test-rg 
 VNET                          : &lt;service short name&gt-vnet                      example: app1-vnet
 Virtual Machines              : &lt;service short name&gt-&lt;role&gt-vm<number&gt  example: app1-sql-vm1 
