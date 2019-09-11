@@ -4,19 +4,19 @@
 
 Konwencja w oparciu o https://docs.microsoft.com/en-us/azure/architecture/best-practices/naming-conventions z małymi poprawkmi dla VMs
 
-<P><PRE>
-&lt;globally unique name&gt;: app1data, service1, convers2 
-&lt;service_short_name&gt;  : app1, ser1, con2 
-&lt;environment&gt;         : dev, prod, QA 
-&lt;role&gt;                : sql, web, messaging
-&lt;disktype&gt;            : OS, Data, DB
-</P>
+```sh
+<globally unique name>: app1data, service1, convers2 
+<service_short_name>  : app1, ser1, con2 
+<environment>         : dev, prod, QA 
+<role>                : sql, web, messaging
+<disktype>            : OS, Data, DB
+```
 
-<P><PRE>
-Resource Group                : &lt;service_short_name&gt-&lt;environment&gt-rg     example: app1-test-rg 
-VNET                          : &lt;service short name&gt-vnet                  example: app1-vnet
-Virtual Machines              : &lt;service short name&gt-&lt;role&gt-vm<number&gt  example: app1-sql-vm1 
-Managed Disk name             : &lt;disktype&gtdisk&lt;number&gt                    example: OSdisk1 
-Storage account name (data)   : &lt;globally unique name&gt&lt;number&gt            example: app1data001
-Storage account name (disks)  : &lt;vm name without hyphens&gtst&lt;number&gt       example: app1sqlvm1st0
-</P>
+```sh
+Resource Group                : <service_short_name>-<environment>-rg     example: app1-test-rg 
+VNET                          : <service short name>-vnet                 example: app1-vnet
+Virtual Machines              : <service short name>-<role>-vm<number>    example: app1-sql-vm1 
+Managed Disk name             : <disktype>disk<number>                    example: OSdisk1 
+Storage account name (data)   : <globally unique name><number>            example: app1data001
+Storage account name (disks)  : <vm name without hyphens>st<number>       example: app1sqlvm1st0
+```
