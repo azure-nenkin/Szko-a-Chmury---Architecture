@@ -144,7 +144,7 @@
       }
     },
     {
-      "name": "nen1-linux-vm1",
+      "name": "vm1",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
@@ -154,7 +154,7 @@
           "mode": "Incremental",
           "templateLink": {
               "contentVersion": "1.0.0.0",
-              "uri": "https://raw.githubusercontent.com/MichalDron/Architecting-Microsoft-Azure-Solutions/master/src/Week_3/3_2/linkedTemplate/vm.json"
+              "uri": "https://raw.githubusercontent.com/azure-nenkin/Szkola-Chmury-Architecture/edit/master/%23TYDZIEN3/%23TYDZIEN3.2/linkedTemplate/vm.json"
           },
           "parameters": {
               "name": { "value": "[variables('vmName1')]" },
