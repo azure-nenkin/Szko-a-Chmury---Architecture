@@ -1,0 +1,190 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "Default Admin username"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Default Admin password"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    }
+  },
+  "variables": {
+    "vmName1": "week3-vm1",
+    "vmName2": "week3-vm2",
+    "nic1": "nic-1",
+    "nic2": "nic-2",
+    "virtualNetworkName": "virtualNetwork",
+    "subnet1Name": "subnet-1",
+    "subnet2Name": "subnet-2",
+    "publicIPAddressName": "publicIp",
+    "subnet1Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet1Name'))]",
+    "subnet2Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet2Name'))]",
+    "networkSecurityGroupName": "NSG"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "[variables('virtualNetworkName')]",
+      "apiVersion": "2017-06-01",
+      "location": "[parameters('location')]",
+      "comments": "This will build a Virtual Network.",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('subnet1Name')]",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24"
+            }
+          },
+          {
+            "name": "[variables('subnet2Name')]",
+            "properties": {
+              "addressPrefix": "10.0.1.0/24"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[variables('nic1')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2017-06-01",
+      "location": "[parameters('location')]",
+      "comments": "This will be your Primary NIC",
+      "dependsOn": [
+        "[variables('publicIpAddressName')]",
+        "[variables('networkSecurityGroupName')]",
+        "[variables('virtualNetworkName')]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnet1Ref')]"
+              },
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIpAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIpAddresses', variables('publicIpAddressName'))]"
+              }
+            }
+          }
+        ],
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+        }
+      }
+    },
+    {
+      "name": "[variables('nic2')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2017-06-01",
+      "location": "[parameters('location')]",
+      "comments": "This will be your Secondary NIC",
+      "dependsOn": [
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "subnet": {
+                "id": "[variables('subnet2Ref')]"
+              },
+              "privateIPAllocationMethod": "Dynamic"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[variables('publicIpAddressName')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2017-06-01",
+      "location": "[parameters('location')]",
+      "comments": "Public IP for your Primary NIC",
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic"
+      }
+    },
+    {
+      "name": "[variables('networkSecurityGroupName')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+              "contentVersion": "1.0.0.0",
+              "uri": "https://raw.githubusercontent.com/MichalDron/Architecting-Microsoft-Azure-Solutions/master/src/Week_3/3_2/linkedTemplate/nsg.json"
+          },
+          "parameters": {
+              "nsgName": {"value": "[variables('networkSecurityGroupName')]"}
+          }
+      }
+    },
+    {
+      "name": "vm1",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+          "[resourceId('Microsoft.Network/networkInterfaces',variables('nic1'))]"
+      ],
+      "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+              "contentVersion": "1.0.0.0",
+              "uri": "https://raw.githubusercontent.com/MichalDron/Architecting-Microsoft-Azure-Solutions/master/src/Week_3/3_2/linkedTemplate/vm.json"
+          },
+          "parameters": {
+              "name": { "value": "[variables('vmName1')]" },
+              "adminUsername": { "value": "[parameters('adminUsername')]" },
+              "adminPassword": { "value": "[parameters('adminPassword')]" },
+              "nicName": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic2'))]" }
+          }
+      }
+    },
+    {
+      "name": "vm2",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+          "[resourceId('Microsoft.Network/networkInterfaces',variables('nic2'))]"
+      ],
+      "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+              "contentVersion": "1.0.0.0",
+              "uri": "https://raw.githubusercontent.com/MichalDron/Architecting-Microsoft-Azure-Solutions/master/src/Week_3/3_2/linkedTemplate/vm.json"
+          },
+          "parameters": {
+              "name": { "value": "[variables('vmName2')]" },
+              "adminUsername": { "value": "[parameters('adminUsername')]" },
+              "adminPassword": { "value": "[parameters('adminPassword')]" },
+              "nicName": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic1'))]" }
+          }
+      }
+    }
+  ],
+  "outputs": {}
+}
