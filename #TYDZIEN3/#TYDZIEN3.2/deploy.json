@@ -154,7 +154,6 @@
           "parameters": {
               "vmName": { "value": "[variables('vmName1')]" },
               "adminUsername": { "value": "[parameters('adminUsername')]" },
-              "authenticationType": "password",
               "adminPasswordOrKey": { "value": "[parameters('adminPassword')]" },
               "ubuntuOSVersion": { "value": "[parameters('ubuntuOSVersion')]" },
               "location": { "value": "[parameters('location')]" },
@@ -178,7 +177,6 @@
           "parameters": {
               "vmName": { "value": "[variables('vmName2')]" },
               "adminUsername": { "value": "[parameters('adminUsername')]" },
-              "authenticationType": "password",
               "adminPasswordOrKey": { "value": "[parameters('adminPassword')]" },
               "ubuntuOSVersion": { "value": "[parameters('ubuntuOSVersion')]" },
               "location": { "value": "[parameters('location')]" },
