@@ -44,7 +44,7 @@
   "variables": {
     "location": "[resourceGroup().location]",
     "dnsLabelPrefix": "GEN-UNIQUE",
-    "authenticationType" = "password",
+    "authenticationType": "password",
     "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'salinuxvm')]",
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
