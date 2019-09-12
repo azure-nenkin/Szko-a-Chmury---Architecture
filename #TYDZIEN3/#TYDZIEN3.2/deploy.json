@@ -155,9 +155,8 @@
               "vmName": { "value": "[variables('vmName1')]" },
               "adminUsername": { "value": "[parameters('adminUsername')]" },
               "adminPasswordOrKey": { "value": "[parameters('adminPassword')]" },
-              "ubuntuOSVersion": { "value": "[parameters('ubuntuOSVersion')]" },
-              "location": { "value": "[parameters('location')]" },
-              "nicName": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic1'))]" }
+              "nicName": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic1'))]" },
+              "ubuntuOSVersion": { "value": "[parameters('ubuntuOSVersion')]" }
           }
       }
     },
@@ -178,9 +177,8 @@
               "vmName": { "value": "[variables('vmName2')]" },
               "adminUsername": { "value": "[parameters('adminUsername')]" },
               "adminPasswordOrKey": { "value": "[parameters('adminPassword')]" },
+              "nicName": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic2'))]" },
               "ubuntuOSVersion": { "value": "[parameters('ubuntuOSVersion')]" },
-              "location": { "value": "[parameters('location')]" },
-              "nicName": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic2'))]" }
           }
       }
     }
