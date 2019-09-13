@@ -16,7 +16,7 @@
     }
   },
   "variables": {
-    "location": "[resourceGroup().location]"
+    "location": "[resourceGroup().location]",
     "vmName1": "week3-vm1",
     "vmName2": "week3-vm2",
     "nic1": "nic-1",
