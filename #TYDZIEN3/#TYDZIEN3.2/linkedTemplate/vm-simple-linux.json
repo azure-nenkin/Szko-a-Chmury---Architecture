@@ -136,7 +136,7 @@
           },
           "dataDisks": [
             {
-              name: "DATAdisk1",
+              "name": "DATAdisk1",
               "diskSizeGB": 1023,
               "lun": 0,
               "createOption": "Empty"
