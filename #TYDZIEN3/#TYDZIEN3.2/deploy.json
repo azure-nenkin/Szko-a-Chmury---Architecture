@@ -3,16 +3,10 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "adminUsername": {
-      "type": "string",
-      "metadata": {
-        "description": "Default Admin username"
-      }
+      "type": "string"
     },
     "adminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Default Admin password"
-      }
+      "type": "securestring"
     }
   },
   "variables": {
