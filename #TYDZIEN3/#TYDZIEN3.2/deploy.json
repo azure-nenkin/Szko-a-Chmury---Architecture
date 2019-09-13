@@ -22,7 +22,6 @@
     "nic1": "nic-1",
     "nic2": "nic-2",
     "virtualNetworkName": "virtualNetwork",
-    "ubuntuOSVersion" : "18.04-LTS", 
     "subnet1Name": "subnet-1",
     "subnet2Name": "subnet-2",
     "publicIPAddressName": "publicIp",
@@ -149,14 +148,13 @@
           "mode": "Incremental",
           "templateLink": {
               "contentVersion": "1.0.0.0",
-              "uri": "https://raw.githubusercontent.com/azure-nenkin/Szkola-Chmury-Architecture/edit/master/%23TYDZIEN3/%23TYDZIEN3.2/linkedTemplate/vm-simple-linux.json"
+              "uri": "https://raw.githubusercontent.com/azure-nenkin/Szkola-Chmury-Architecture/master/%23TYDZIEN3/%23TYDZIEN3.2/linkedTemplate/vm-ubuntu-template.json"
           },
           "parameters": {
               "vmName": { "value": "[variables('vmName1')]" },
               "adminUsername": { "value": "[parameters('adminUsername')]" },
-              "adminPasswordOrKey": { "value": "[parameters('adminPassword')]" },
-              "nicName": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic1'))]" },
-              "ubuntuOSVersion": { "value": "[parameters('ubuntuOSVersion')]" }
+              "adminPassword": { "value": "[parameters('adminPassword')]" },
+              "nicName": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic1'))]" }
           }
       }
     },
@@ -171,14 +169,13 @@
           "mode": "Incremental",
           "templateLink": {
               "contentVersion": "1.0.0.0",
-              "uri": "https://raw.githubusercontent.com/azure-nenkin/Szkola-Chmury-Architecture/edit/master/%23TYDZIEN3/%23TYDZIEN3.2/linkedTemplate/vm-simple-linux.json"
+              "uri": "https://raw.githubusercontent.com/azure-nenkin/Szkola-Chmury-Architecture/master/%23TYDZIEN3/%23TYDZIEN3.2/linkedTemplate/vm-ubuntu-template.json"
           },
           "parameters": {
               "vmName": { "value": "[variables('vmName2')]" },
               "adminUsername": { "value": "[parameters('adminUsername')]" },
-              "adminPasswordOrKey": { "value": "[parameters('adminPassword')]" },
-              "nicName": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic2'))]" },
-              "ubuntuOSVersion": { "value": "[parameters('ubuntuOSVersion')]" },
+              "adminPassword": { "value": "[parameters('adminPassword')]" },
+              "nicName": { "value": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic2'))]" }
           }
       }
     }
