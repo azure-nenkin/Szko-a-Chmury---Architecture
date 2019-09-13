@@ -2,29 +2,46 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "vmName": {
+    "vnetName": {
       "type": "string",
+      "defaultValue": "VNet1",
       "metadata": {
-        "description": "VMname for the Virtual Machine."
+        "description": "Name of the virtual network"
       }
     },
-    "adminUsername": {
+    "vnetAddressPrefix": {
       "type": "string",
+      "defaultValue": "10.0.0.0/16",
       "metadata": {
-        "description": "User name for the Virtual Machine."
+        "description": "Address prefix for the virtual network"
       }
     },
-    "adminPassword": {
-      "type": "securestring",
+    "subnet1Name": {
+      "type": "string",
+      "defaultValue": "subnet1",
       "metadata": {
-        "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+        "description": "Name of the first subnet in the VNet"
       }
     },
-    "nicName": {
+    "subnet1Prefix": {
       "type": "string",
-      "defaultValue": "myVMNic",
+      "defaultValue": "10.0.1.0/24",
       "metadata": {
-        "description": "NIC name esources."
+        "description": "Address prefix for subnet1"
+      }
+    },
+    "subnet2Name": {
+      "type": "string",
+      "defaultValue": "subnet2",
+      "metadata": {
+        "description": "Name of the second subnet in the VNet"
+      }
+    },
+    "subnet2Prefix": {
+      "type": "string",
+      "defaultValue": "10.0.2.0/24",
+      "metadata": {
+        "description": "Address prefix for subnet2"
       }
     }
   },
