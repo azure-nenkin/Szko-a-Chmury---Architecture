@@ -124,6 +124,7 @@
       "name": "[variables('networkSecurityGroupName')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "comments": "Create nsg",
       "properties": {
           "mode": "Incremental",
           "templateLink": {
@@ -138,9 +139,10 @@
     
     
     {
-      "name": "vm1",
+      "name": "[variables('vmName1')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "comments": "Create vm1",
       "dependsOn": [
           "[resourceId('Microsoft.Network/networkInterfaces',variables('nic1'))]"
       ],
@@ -161,9 +163,10 @@
     
     
     {
-      "name": "vm2",
+      "name": "[variables('vmName2')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
+      "comments": "Create vm2",
       "dependsOn": [
           "[resourceId('Microsoft.Network/networkInterfaces',variables('nic2'))]"
       ],
