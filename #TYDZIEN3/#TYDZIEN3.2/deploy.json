@@ -31,10 +31,30 @@
   },
   "resources": [
     {
+      "name": "[variables('networkSecurityGroupName')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "comments": "Create nsg",
+      "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+              "contentVersion": "1.0.0.0",
+              "uri": "https://raw.githubusercontent.com/azure-nenkin/Szkola-Chmury-Architecture/master/%23TYDZIEN3/%23TYDZIEN3.2/linkedTemplate/nsg-template.json"
+          },
+          "parameters": {
+              "nsgName": {"value": "[variables('networkSecurityGroupName')]"}
+          }
+      }
+    },
+    
+    {
       "name": "[variables('virtualNetworkName')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-06-01",
       "comments": "Create vnet",
+      dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups',variables('networkSecurityGroupName'))]"
+      ],
       "properties": {
           "mode": "Incremental",
           "templateLink": {
@@ -49,39 +69,6 @@
               "subnet2Name": {"value": "[variables('subnet2Name')]"},
               "subnet2Prefix": {"value": "[variables('subnet2Prefix')]"}   
           }
-      }
-    },
-    
-    
-    
-    
-    
-    {
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[variables('virtualNetworkName')]",
-      "apiVersion": "2017-06-01",
-      "location": "[parameters('location')]",
-      "comments": "This will build a Virtual Network.",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "10.0.0.0/16"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[variables('subnet1Name')]",
-            "properties": {
-              "addressPrefix": "10.0.0.0/24"
-            }
-          },
-          {
-            "name": "[variables('subnet2Name')]",
-            "properties": {
-              "addressPrefix": "10.0.1.0/24"
-            }
-          }
-        ]
       }
     },
     
