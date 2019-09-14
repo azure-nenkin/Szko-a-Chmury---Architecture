@@ -52,7 +52,7 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-06-01",
       "comments": "Create vnet",
-      dependsOn": [
+      "dependsOn": [
         "[resourceId('Microsoft.Network/networkSecurityGroups',variables('networkSecurityGroupName'))]"
       ],
       "properties": {
