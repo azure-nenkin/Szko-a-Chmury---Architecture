@@ -77,7 +77,7 @@
       "name": "[variables('nic1')]",
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2017-06-01",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "comments": "This will be your Primary NIC",
       "dependsOn": [
         "[variables('publicIpAddressName')]",
@@ -110,7 +110,7 @@
       "name": "[variables('nic2')]",
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2017-06-01",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "comments": "This will be your Secondary NIC",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
@@ -135,7 +135,7 @@
       "name": "[variables('publicIpAddressName')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2017-06-01",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "comments": "Public IP for your Primary NIC",
       "properties": {
         "publicIPAllocationMethod": "Dynamic"
