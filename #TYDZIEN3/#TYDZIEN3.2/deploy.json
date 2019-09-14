@@ -15,17 +15,47 @@
     "vmName2": "tydzien3-lnx-vm2",
     "nic1": "tydzien3-lnx-vm1-nic1",
     "nic2": "tydzien3-lnx-vm2-nic2",
-    
-    
     "virtualNetworkName": "virtualNetwork",
+    "vnetAddressPrefix": "10.0.0.0/16",
     "subnet1Name": "subnet-1",
     "subnet2Name": "subnet-2",
+    "subnet1Prefix": "10.0.1.0/24",
+    "subnet2Prefix": "10.0.2.0/24",
+    
+  
     "publicIPAddressName": "publicIp",
     "subnet1Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet1Name'))]",
     "subnet2Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet2Name'))]",
+    
     "networkSecurityGroupName": "tydzien3-lnx-nsg"
   },
   "resources": [
+    {
+      "name": "[variables('virtualNetworkName')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-06-01",
+      "comments": "Create vnet",
+      "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+              "contentVersion": "1.0.0.0",
+              "uri": "https://raw.githubusercontent.com/azure-nenkin/Szkola-Chmury-Architecture/master/%23TYDZIEN3/%23TYDZIEN3.2/linkedTemplate/vnet-template.json"
+          },
+          "parameters": {
+              "vnetName": {"value": "[variables('virtualNetworkName')]"},
+              "vnetAddressPrefix": {"value": "[variables('vnetAddressPrefix')]"},
+              "subnet1Name": {"value": "[variables('subnet1Name')]"},
+              "subnet1Prefix": {"value": "[variables('subnet1Prefix')]"},
+              "subnet2Name": {"value": "[variables('subnet2Name')]"},
+              "subnet2Prefix": {"value": "[variables('subnet2Prefix')]"}   
+          }
+      }
+    },
+    
+    
+    
+    
+    
     {
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[variables('virtualNetworkName')]",
@@ -54,6 +84,8 @@
         ]
       }
     },
+    
+    
     {
       "name": "[variables('nic1')]",
       "type": "Microsoft.Network/networkInterfaces",
@@ -85,6 +117,8 @@
         }
       }
     },
+    
+    
     {
       "name": "[variables('nic2')]",
       "type": "Microsoft.Network/networkInterfaces",
@@ -108,6 +142,8 @@
         ]
       }
     },
+    
+    
     {
       "name": "[variables('publicIpAddressName')]",
       "type": "Microsoft.Network/publicIPAddresses",
