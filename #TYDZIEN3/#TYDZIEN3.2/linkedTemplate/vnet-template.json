@@ -4,114 +4,77 @@
   "parameters": {
     "vnetName": {
       "type": "string",
-      "defaultValue": "VNet1",
       "metadata": {
         "description": "Name of the virtual network"
       }
     },
     "vnetAddressPrefix": {
       "type": "string",
-      "defaultValue": "10.0.0.0/16",
       "metadata": {
         "description": "Address prefix for the virtual network"
       }
     },
     "subnet1Name": {
       "type": "string",
-      "defaultValue": "subnet1",
       "metadata": {
         "description": "Name of the first subnet in the VNet"
       }
     },
     "subnet1Prefix": {
       "type": "string",
-      "defaultValue": "10.0.1.0/24",
       "metadata": {
         "description": "Address prefix for subnet1"
       }
     },
     "subnet2Name": {
       "type": "string",
-      "defaultValue": "subnet2",
       "metadata": {
         "description": "Name of the second subnet in the VNet"
       }
     },
     "subnet2Prefix": {
       "type": "string",
-      "defaultValue": "10.0.2.0/24",
       "metadata": {
         "description": "Address prefix for subnet2"
       }
+    },
+    "networkSecurityGroupName": {
+       "type": "string",
+       "metadata": {
+         "description": "Name of the Network Security Groups."
+       }
     }
-  },
-  "variables": {
-    "location": "[resourceGroup().location]",
-    
-    "publicIPAddressName": "myPublicIP",
-    "publicIPAddressType": "Dynamic",
-    "dnsLabelPrefix": "GEN-UNIQUE",
-    "virtualNetworkName": "MyVNET",
-    "addressPrefix": "10.0.0.0/16",
-    "subnetName": "Subnet",
-    "subnetPrefix": "10.0.0.0/24",
-    
-    "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]"
   },
   "resources": [
     {
-      "type": "Microsoft.Network/publicIPAddresses",
-      "apiVersion": "2018-11-01",
-      "name": "[variables('publicIPAddressName')]",
-      "location": "[variables('location')]",
-      "properties": {
-        "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
-        "dnsSettings": {
-          "domainNameLabel": "[variables('dnsLabelPrefix')]"
-        }
-      }
-    },
-    {
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2018-11-01",
-      "name": "[variables('virtualNetworkName')]",
-      "location": "[variables('location')]",
+      "name": "[variables('vnetName')]",
+      "location": "[resourceGroup().location]",
+      
+      
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "[variables('addressPrefix')]"
+            "[parameters('vnetAddressPrefix')]"
           ]
         },
         "subnets": [
           {
-            "name": "[variables('subnetName')]",
+            "name": "[parameters('subnet1Name')]",
             "properties": {
-              "addressPrefix": "[variables('subnetPrefix')]"
+              "addressPrefix": "[parameters('subnet1Prefix')]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+              }
             }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Microsoft.Network/networkInterfaces",
-      "apiVersion": "2018-11-01",
-      "name": "[variables('nicName')]",
-      "location": "[variables('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-        "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
-      ],
-      "properties": {
-        "ipConfigurations": [
+          },
           {
-            "name": "ipconfig1",
+            "name": "[parameters('subnet2Name')]",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
-              },
-              "subnet": {
-                "id": "[variables('subnetRef')]"
+              "addressPrefix": "[parameters('subnet2Prefix')]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
               }
             }
           }
