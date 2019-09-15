@@ -1,0 +1,17 @@
+{
+    "Name": "VMs Custom Role",
+    "IsCustom": true,
+    "Description":  "Role: Start VM, Stop VM, Restart VM, Creates or Updates a Support Ticket.",
+    "Actions": [
+      "Microsoft.Compute/virtualMachines/start/action",
+      "Microsoft.Compute/virtualMachines/powerOff/action",
+      "Microsoft.Compute/virtualMachines/restart/action",
+      "Microsoft.Support/supportTickets/write"
+    ],
+    "NotActions": [],
+    "DataActions":  [], 
+    "NotDataActions":  [],
+    "AssignableScopes": [
+      "/subscriptions/{subscriptionId}"
+    ]
+  }
