@@ -57,12 +57,12 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": [concat("OSdisk-",parameters('vmName')],
+            "name": [concat("OSdisk-","[parameters('vmName')]")],
             "createOption": "FromImage"
           },
           "dataDisks": [
             {
-              "name": [concat("Datadisk-",parameters('vmName')],
+              "name": [concat("Datadisk-","[parameters('vmName')}"],
               "diskSizeGB": 1023,
               "lun": 0,
               "createOption": "Empty"
