@@ -52,7 +52,7 @@
       "apiVersion": "2017-06-01",
       "comments": "Create vnet",
       "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/',variables('networkSecurityGroupName')]"
+        "[variables('networkSecurityGroupName')]"
       ],
       "properties": {
           "mode": "Incremental",
