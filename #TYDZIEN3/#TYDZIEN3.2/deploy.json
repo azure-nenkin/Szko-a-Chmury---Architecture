@@ -26,7 +26,7 @@
     "subnet1Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet1Name'))]",
     "subnet2Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet2Name'))]",
     
-    "networkSecurityGroupName": "tydzien3-lnx-nsg",
+    "networkSecurityGroupName": "tydzien3-lnx-nsg"
   },
   "resources": [
     {
