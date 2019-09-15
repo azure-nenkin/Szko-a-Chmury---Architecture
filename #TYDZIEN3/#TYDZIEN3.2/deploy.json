@@ -69,8 +69,7 @@
           }
       }
     },
-    
-    
+      
     {
       "name": "[variables('nic1')]",
       "type": "Microsoft.Network/networkInterfaces",
@@ -86,16 +85,13 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "subnet": {
-                "id": "[variables('subnet1Ref')]"
-              },
+              "subnet": { "id": "[variables('subnet1Ref')]"},
               "privateIPAllocationMethod": "Dynamic"
             }
           }
         ]
       }
     },
-    
     
     {
       "name": "[variables('nic2')]",
@@ -112,9 +108,7 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "subnet": {
-                "id": "[variables('subnet2Ref')]"
-              },
+              "subnet": {"id": "[variables('subnet2Ref')]"},
               "privateIPAllocationMethod": "Dynamic"
               }  
             }
@@ -144,8 +138,7 @@
           }
       }
     },
-    
-    
+      
     {
       "name": "[variables('vmName2')]",
       "type": "Microsoft.Resources/deployments",
