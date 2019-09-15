@@ -29,7 +29,7 @@
   },
   "variables": {
     "location": "[resourceGroup().location]", 
-    "vmSize": "Standard_A1",
+    "vmSize": "B1ls",
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
     "ubuntuOSVersion": "18.04-LTS"
