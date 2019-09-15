@@ -5,7 +5,7 @@
         "adminUsername": {
             "reference": {
                 "keyVault": {
-                    "id": "/subscriptions/<sub_id>/resourceGroups/azure-nenkin-rg/providers/Microsoft.KeyVault/vaults/azure-nenkin-kv"
+                    "id": "/subscriptions/<sub_id>/resourceGroups/azure-nenkin-kv-rg/providers/Microsoft.KeyVault/vaults/azure-nenkin-kv"
                 },
                 "secretName": "adminUsername"
             }
@@ -13,7 +13,7 @@
         "adminPassword": {
             "reference": {
                 "keyVault": {
-                    "id": "/subscriptions/<sub_id>/resourceGroups/azure-nenkin-rg/providers/Microsoft.KeyVault/vaults/azure-nenkin-kv"
+                    "id": "/subscriptions/<sub_id>/resourceGroups/azure-nenkin-kv-rg/providers/Microsoft.KeyVault/vaults/azure-nenkin-kv"
                 },
                 "secretName": "adminPassword"
             }
