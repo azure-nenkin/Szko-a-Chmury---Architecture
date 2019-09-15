@@ -22,12 +22,12 @@
     "subnet1Prefix": "10.0.1.0/24",
     "subnet2Prefix": "10.0.2.0/24",
     
-  
     "publicIPAddressName": "publicIp",
     "subnet1Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet1Name'))]",
     "subnet2Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet2Name'))]",
     
-    "networkSecurityGroupName": "tydzien3-lnx-nsg"
+    "networkSecurityGroupName": "tydzien3-lnx-nsg",
+    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"    
   },
   "resources": [
     {
@@ -53,7 +53,7 @@
       "apiVersion": "2017-06-01",
       "comments": "Create vnet",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/networkSecurityGroups',variables('networkSecurityGroupName'))]"
+        "[concat('Microsoft.Resources/deployments/',variables('networkSecurityGroupName')]"
       ],
       "properties": {
           "mode": "Incremental",
@@ -81,7 +81,7 @@
       "comments": "This will be your Primary NIC",
       "dependsOn": [
         "[variables('publicIpAddressName')]",
-        "[variables('networkSecurityGroupName')]",
+        "[concat('Microsoft.Resources/deployments/',variables('networkSecurityGroupName')]",
         "[variables('virtualNetworkName')]"
       ],
       "properties": {
@@ -100,7 +100,7 @@
           }
         ],
         "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+          "id": "nsgId"
         }
       }
     },
@@ -129,7 +129,7 @@
         ]
       }
     },
-    
+      
     
     {
       "name": "[variables('publicIpAddressName')]",
@@ -139,24 +139,6 @@
       "comments": "Public IP for your Primary NIC",
       "properties": {
         "publicIPAllocationMethod": "Dynamic"
-      }
-    },
-    
-    
-    {
-      "name": "[variables('networkSecurityGroupName')]",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "comments": "Create nsg",
-      "properties": {
-          "mode": "Incremental",
-          "templateLink": {
-              "contentVersion": "1.0.0.0",
-              "uri": "https://raw.githubusercontent.com/azure-nenkin/Szkola-Chmury-Architecture/master/%23TYDZIEN3/%23TYDZIEN3.2/linkedTemplate/nsg-template.json"
-          },
-          "parameters": {
-              "nsgName": {"value": "[variables('networkSecurityGroupName')]"}
-          }
       }
     },
     
