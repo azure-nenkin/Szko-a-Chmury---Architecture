@@ -57,7 +57,7 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": [concat("OSdisk-","[parameters('vmName')]")],
+            "name": [concat("OSdisk-", parameters('vmName'))],
             "createOption": "FromImage"
           },
           "dataDisks": [
