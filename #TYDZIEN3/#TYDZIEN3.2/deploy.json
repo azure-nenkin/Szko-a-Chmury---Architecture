@@ -48,7 +48,7 @@
     {
       "name": "[variables('virtualNetworkName')]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2017-06-01",
+      "apiVersion": "2015-01-01",
       "comments": "Create vnet",
       "dependsOn": [
         "[variables('networkSecurityGroupName')]"
