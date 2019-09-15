@@ -3,10 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "adminUsername": {
-                "value": "GEN-UNIQUE"
+                "value": "adminuser"
             },
         "adminPassword": {
-            "value": "Passw0rd"
+            "value": "SzkolaChmury#3"
         }
     }
 }
