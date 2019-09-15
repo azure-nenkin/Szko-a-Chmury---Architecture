@@ -77,9 +77,8 @@
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2017-06-01",
       "location": "[variables('location')]",
-      "comments": "This will be your Primary NIC",
+      "comments": "Create nic1",
       "dependsOn": [
-        "[variables('publicIpAddressName')]",
         "[variables('networkSecurityGroupName')]",
         "[variables('virtualNetworkName')]"
       ],
@@ -91,10 +90,7 @@
               "subnet": {
                 "id": "[variables('subnet1Ref')]"
               },
-              "privateIPAllocationMethod": "Dynamic",
-              "publicIpAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIpAddresses', variables('publicIpAddressName'))]"
-              }
+              "privateIPAllocationMethod": "Dynamic"
             }
           }
         ]
@@ -107,9 +103,8 @@
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2017-06-01",
       "location": "[variables('location')]",
-      "comments": "This will be your Secondary NIC",
+      "comments": "Create nic2",
       "dependsOn": [
-        "[variables('publicIpAddressName')]",
         "[variables('networkSecurityGroupName')]",
         "[variables('virtualNetworkName')]"
       ],
@@ -121,28 +116,13 @@
               "subnet": {
                 "id": "[variables('subnet2Ref')]"
               },
-              "privateIPAllocationMethod": "Dynamic",
-              "publicIpAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIpAddresses', variables('publicIpAddressName'))]"
+              "privateIPAllocationMethod": "Dynamic"
               }  
             }
           }
         ]
       }
     },
-      
-    
-    {
-      "name": "[variables('publicIpAddressName')]",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "apiVersion": "2017-06-01",
-      "location": "[variables('location')]",
-      "comments": "Public IP for your Primary NIC",
-      "properties": {
-        "publicIPAllocationMethod": "Dynamic"
-      }
-    },
-    
     
     {
       "name": "[variables('vmName1')]",
