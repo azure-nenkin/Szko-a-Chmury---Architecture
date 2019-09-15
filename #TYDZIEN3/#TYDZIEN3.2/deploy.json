@@ -65,7 +65,8 @@
               "subnet1Name": {"value": "[variables('subnet1Name')]"},
               "subnet1Prefix": {"value": "[variables('subnet1Prefix')]"},
               "subnet2Name": {"value": "[variables('subnet2Name')]"},
-              "subnet2Prefix": {"value": "[variables('subnet2Prefix')]"}   
+              "subnet2Prefix": {"value": "[variables('subnet2Prefix')]"},
+              "networkSecurityGroupName": {"value": "[variables('networkSecurityGroupName')]"}
           }
       }
     },
