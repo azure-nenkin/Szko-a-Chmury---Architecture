@@ -27,7 +27,6 @@
     "subnet2Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet2Name'))]",
     
     "networkSecurityGroupName": "tydzien3-lnx-nsg",
-    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"    
   },
   "resources": [
     {
@@ -81,7 +80,7 @@
       "comments": "This will be your Primary NIC",
       "dependsOn": [
         "[variables('publicIpAddressName')]",
-        "[concat('Microsoft.Resources/deployments/',variables('networkSecurityGroupName')]",
+        "[variables('networkSecurityGroupName')]",
         "[variables('virtualNetworkName')]"
       ],
       "properties": {
@@ -98,10 +97,7 @@
               }
             }
           }
-        ],
-        "networkSecurityGroup": {
-          "id": "nsgId"
-        }
+        ]
       }
     },
     
@@ -113,7 +109,9 @@
       "location": "[variables('location')]",
       "comments": "This will be your Secondary NIC",
       "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+        "[variables('publicIpAddressName')]",
+        "[variables('networkSecurityGroupName')]",
+        "[variables('virtualNetworkName')]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -123,7 +121,10 @@
               "subnet": {
                 "id": "[variables('subnet2Ref')]"
               },
-              "privateIPAllocationMethod": "Dynamic"
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIpAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIpAddresses', variables('publicIpAddressName'))]"
+              }  
             }
           }
         ]
