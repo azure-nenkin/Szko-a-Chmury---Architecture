@@ -1,0 +1,27 @@
+$rgName = 'fei-dev-rg-secret'
+$keyVaultName = 'fei-dev-kvault-secrets'
+
+az group create -n $rgName -l northeurope
+az keyvault create -n fei-dev-kvault-secrets -g $rgName
+
+az keyvault update -n $keyVaultName -g $rgName --set properties.enabledForDeployment=true
+az keyvault update -n $keyVaultName -g $rgName --set properties.enabledForTemplateDeployment=true
+
+$adminUsernameKey = 'adminUsername'
+$adminUsername = 'kamilek'
+az keyvault secret set --name $adminUsernameKey `
+    --vault-name $keyVaultName `
+    --value $adminUsername
+
+$adminPasswordKey = 'adminPassword'
+$adminPassword = 'p4ssword!'
+az keyvault secret set --name $adminPasswordKey `
+    --vault-name $keyVaultName `
+    --value $adminPassword
+
+$rgName = 'fei-dev-rg-vms'
+az group create -n $rgName -l northeurope
+az group deployment create -n tydzien3.4 `
+    -g $rgName `
+    --template-file ./template.json `
+    --parameters ./template.params.json
