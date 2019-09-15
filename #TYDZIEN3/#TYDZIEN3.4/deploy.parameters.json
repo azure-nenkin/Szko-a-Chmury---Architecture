@@ -3,10 +3,20 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "adminUsername": {
-                "value": "GEN-UNIQUE"
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/<sub_id>/resourceGroups/RG-ArchitectingAzureSolutions/providers/Microsoft.KeyVault/vaults/Week3"
+                },
+                "secretName": "adminUsername"
+            }
             },
         "adminPassword": {
-            "value": "Passw0rd"
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/<sub_id>/resourceGroups/RG-ArchitectingAzureSolutions/providers/Microsoft.KeyVault/vaults/Week3"
+                },
+                "secretName": "adminPassword"
+            }
         }
     }
 }
